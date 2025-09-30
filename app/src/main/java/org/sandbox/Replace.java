@@ -7,7 +7,7 @@ import software.amazon.awssdk.services.ssm.model.GetParametersResponse;
 
 public class Replace {
 
-    public static void replacePlaceholders(String string) {
+    public static String replacePlaceholders(String string) {
 
         SsmClient ssmClient = SsmClient
                 .builder()
@@ -25,10 +25,11 @@ public class Replace {
 
         GetParametersResponse getParametersResponse = ssmClient.getParameters(getParametersRequest);
 
+        System.out.println(getParametersResponse.parameters().get(0).name());
 
-        System.out.println(getParametersResponse.parameters().get(0).value());
 
 
+        return getParametersResponse.parameters().get(0).value();
 
 
     }
